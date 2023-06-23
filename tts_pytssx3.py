@@ -27,6 +27,7 @@ class AudioGenerator:
     def generate_audio_file(self, text, filename):
         self.lock.acquire()  # Acquire the lock to prevent the main thread from proceeding
         self.finished = False  # Reset the finished flag for the new synthesis
+        #save to file is just what i do. its not necessary.
         self.engine.save_to_file(text, filename)  # Save the speech to the specified file
         self.engine.startLoop(False)  # Start the engine loop
         self.engine.iterate()  # Run the engine loop iteration
@@ -37,13 +38,13 @@ class AudioGenerator:
 
 # Example usage
 text = "Hi. How are you? what are you doing?"
-file_path = "test.mp3"
+file_path = "test.mp3" #save to file is just what i do. its not necessary.
 
 audio_generator = AudioGenerator()
-x = audio_generator.generate_audio_file(text, file_path)
+x = audio_generator.generate_audio_file(text, file_path) #save to file is just what i do. its not necessary.
 audio_generator.lock.acquire()  # Wait for the synthesis to complete
 audio_generator.lock.release()  # Release the lock
-audio_generator.get_audio(file_path)
+audio = audio_generator.get_audio(file_path) # i do save to file so i can do this. now you can play this audio (for example send it to frontend)
 
 
 
